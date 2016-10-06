@@ -19,6 +19,11 @@ ADD softether.sv.conf /etc/supervisor/conf.d/softether.sv.conf
 ADD softether.sh /usr/local/src/softether.sh
 RUN chmod 700 /usr/local/src/softether.sh
 
+# Clean container
+RUN yum -y clean all \
+	&& yum -y autoremove \
+	&& rm -rf ~/.cache/pip/*
+
 EXPOSE 1194/udp 5555/tcp 1701/tcp 4500/udp 500/udp
 
 # default command
