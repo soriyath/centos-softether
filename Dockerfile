@@ -13,8 +13,11 @@ RUN ./configure <<< $'1\n2\n' \
 	&& make install \
 	&& cd .. \
 	&& rm -rf SoftEtherVPN
+WORKDIR /
 
 ADD softether.sv.conf /etc/supervisor/conf.d/softether.sv.conf
+ADD softether.sh /usr/local/src/softether.sh
+RUN chmod 700 /usr/local/src/softether.sh
 
 EXPOSE 1194/udp 5555/tcp 1701/tcp 4500/udp 500/udp
 
