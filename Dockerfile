@@ -9,7 +9,7 @@ WORKDIR /usr/local/src
 RUN git clone --depth=1 https://github.com/SoftEtherVPN/SoftEtherVPN.git
 WORKDIR /usr/local/src/SoftEtherVPN
 RUN ./configure <<< $'1\n2\n' \
-	&& make \
+	&& make -j $(cat /proc/cpuinfo | grep processor | wc -l) \
 	&& make install \
 	&& cd .. \
 	&& rm -rf SoftEtherVPN
